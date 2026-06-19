@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+
+metadata:
+
+  name: backend-deployment
+
+  namespace: portfolio-app
+
+
+spec:
+
+  replicas: 2
+
+
+  selector:
+
+    matchLabels:
+
+      app: backend
+
+
+  template:
+
+    metadata:
+
+      labels:
+
+        app: backend
+
+
+    spec:
+
+      containers:
+
+      - name: backend
+
+        image: vishnukantheti/k8s-backend:v3
+
+
+        ports:
+
+        - containerPort: 5000
