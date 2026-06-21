@@ -1,0 +1,68 @@
+# Default values for por
+# This section builds out the service account more information can be found here: https://kubernetes.io/docs/concepts/security/service-account
+  # Specifies whether a service account should be created.
+
+  # Automatically mount a ServiceAccount's API c
+  # Annotations to add to the service accoun
+  # The name of the service account to use.
+
+# This is for setting Kubernetes Annotations to a Pod.
+# For more information checkout: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotatio
+# This is for setting Kubernetes Labels to a Pod.
+# For more information checkou
+
+
+  # fsGroup: 2000
+
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+# This is for setting up a service more information can be found here: https://kubernetes.io/docs/concepts/services-networking/servic
+  # This sets the service type more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
+  # This sets the ports more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#field-spec-ports
+
+
+# This block is for setting up the ingress for more information can be found here: https://kubernetes.io/docs/concepts/serv
+frontend:
+
+  replicaCount: 2
+
+  image: vishnukantheti/k8s-frontend
+
+  tag: v4
+
+  port: 80
+
+
+
+backend:
+
+  replicaCount: 2
+
+  image: vishnukantheti/k8s-backend
+
+  tag: v3
+
+  port: 5000
+
+
+
+mysql:
+
+  image: mysql
+
+  tag: "8"
+
+  port: 3306
+
+  password: mysqlpassword
+
+
+
+ingress:
+
+  host: myapp.local

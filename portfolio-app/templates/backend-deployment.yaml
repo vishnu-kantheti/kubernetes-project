@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+
+metadata:
+
+  name: backend-deployment
+
+  namespace: portfolio-app
+
+
+spec:
+
+  replicas: {{ .Values.backend.replicaCount }}
+
+
+  selector:
+
+    matchLabels:
+
+      app: backend
+
+
+  template:
+
+    metadata:
+
+      labels:
+
+        app: backend
+
+
+    spec:
+
+      containers:
+
+      - name: backend
+
+        image: "{{ .Values.backend.image }}:{{ .Values.backend.tag }}"
+
+
+        ports:
+
+        - containerPort: 5000
