@@ -15,8 +15,14 @@ jobs:
 
     steps:
 
+
     - name: Checkout code
       uses: actions/checkout@v4
+
+
+    - name: Generate image tag
+      run: |
+        echo "IMAGE_TAG=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
 
     - name: Login to Docker Hub
@@ -28,9 +34,12 @@ jobs:
 
     - name: Build Docker image
       run: |
-        docker build -t vishnukantheti/k8s-frontend:v4 ./frontend
+        docker build \
+        -t vishnukantheti/k8s-frontend:${{ env.IMAGE_TAG }} \
+        ./frontend
 
 
     - name: Push Docker image
       run: |
-        docker push vishnukantheti/k8s-frontend:v4
+        docker push \
+        vishnukantheti/k8s-frontend:${{ env.IMAGE_TAG }}
